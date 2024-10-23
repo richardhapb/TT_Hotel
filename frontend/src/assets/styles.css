@@ -1,0 +1,76 @@
+.app {
+    width: 100%;
+}
+
+.wrapper {
+    margin: 3rem auto;
+    max-width: 500px;
+    text-align: center;
+}
+
+form {
+    margin: 0 auto;
+    width: 100%;
+}
+
+div > form {
+    width: 300px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.form-wrapper p {
+    margin: 1rem auto;
+    max-width: 300px;
+    text-align: center;
+}
+
+.form-wrapper h1, h2 {
+    text-align: center;
+    margin: 1rem auto;
+}
+
+input {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    margin: 0.8rem auto;
+}
+
+button {
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin: 1rem auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+@media (max-width: 400px) {
+    .form-wrapper p {
+        max-width: 100%;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    div > form {
+        width: 100%;
+    }
+}

@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'email_token',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -121,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'America/Santiago'
 
@@ -140,10 +143,26 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-BACKEND_URL = "http://127.0.0.1:8000/api"
-FRONTEND_URL = "http://127.0.0.1:8000/api"
+BACKEND_URL = "http://localhost:8000/api"
+FRONTEND_URL = "http://localhost:5173"
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 # CELERY_TASK_ALWAYS_EAGER = True
 # CELERY_TASK_EAGER_PROPAGATES = True
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    FRONTEND_URL
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^http://localhost:\d+",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    FRONTEND_URL
+]
+
+CORS_ALLOW_CREDENTIALS = True

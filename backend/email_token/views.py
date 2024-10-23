@@ -19,11 +19,15 @@ def generate_token(customer):
 
 @api_view(['GET'])
 def verify_token(_, token):
-    email_token = EmailToken.objects.get(token=token)
-    if email_token.created_at.timestamp() + 600 < datetime.datetime.now().timestamp():
-        refresh_token(token)
-        send_verification_email(email_token.customer, token)
-        return Response({"error": "Token expirado"}, status=400)
+    try:
+        email_token = EmailToken.objects.get(token=token)
+        if email_token.created_at.timestamp() + 600 < datetime.datetime.now().timestamp():
+            new_token = refresh_token(token)
+            send_verification_email(email_token.customer, new_token)
+            return Response({"error": "Token expirado, te enviamos uno nuevo a tu correo."}, status=400)
+    except Exception as e:
+        print(e)
+        return Response({"error": "Token no encontrado, verifica tu correo y vuelve a intentarlo"}, status=400)
     
     try:
         response = verify_email(email_token.customer.email)
@@ -54,7 +58,7 @@ def verify_email(email):
     
     customer.email_confirmed = True
     customer.save()
-    return Response({"success": "Email confirmado"}, status=200)
+    return Response({"success": "Email confirmado", "email": customer.email}, status=200)
     
 
 def send_verification_email(customer, token):

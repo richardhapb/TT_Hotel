@@ -51,7 +51,6 @@ def new_user(validated_data):
     except Exception as e:
         print("No fue posible crear el usuario")
         return Response({"error": e.args[0]}, status=400)
-    
 
     try:
         # Send verification email
@@ -78,6 +77,7 @@ def set_password(request):
             return Response({"error": "Email no encontrado"}, status=400)
 
         customer.set_password(password)
+        customer.save()
     except Exception as e:
         print(e)
         return Response({"error": e.args[0]}, status=400)
@@ -130,10 +130,12 @@ def refresh(request):
     
     return response
 
+
+@api_view(['POST'])
 def logout(request):
     try:
-        response = Response({"success": "Sesión finalizada"}, status=200)
-        response.delete_cookie("refresh_token")
+        response = Response({"success": "Sesión finalizada", "access_token": None}, status=200)
+        response.delete_cookie("refresh_token", domain=settings.FRONTEND_URL)
     except Exception as e:
         print(e)
         return Response({"error": e.args[0]}, status=400)
@@ -200,6 +202,8 @@ def change_password(request):
         password = data["password"]
         new_password = data["new_password"]
         confirm_password = data["confirm_password"]
+        if new_password != confirm_password:
+            return Response({"error": "Las contraseñas no coinciden"})
     except Exception as e:
         print(e)
         return Response({"error": e.args[0]}, status=400)
@@ -212,6 +216,7 @@ def change_password(request):
         if new_password != confirm_password:
             return Response({"error": "Las contraseñas no coinciden"}, status=400)
         customer.set_password(new_password)
+        customer.save()
         return Response({"success": "Contraseña cambiada"}, status=200)
     except Exception as e:
         print(e)
