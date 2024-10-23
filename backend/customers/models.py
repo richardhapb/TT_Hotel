@@ -5,7 +5,7 @@ class Customer(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=100)
     password = models.CharField(max_length=100, null=True)
-    email_confirmed = models.BooleanField(default=False)
+    email_confirmed = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.name

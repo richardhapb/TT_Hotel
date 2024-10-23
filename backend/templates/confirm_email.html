@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirma tu Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Confirma tu dirección de correo electrónico!</h1>
+        <p>Hola, {{name}}.</p>
+        <p>Gracias por inscribirte en el sorteo de San Valentín. Para completar tu registro, por favor haz clic en el enlace a continuación para verificar tu correo electrónico:</p>
+        <p><a href="{{verification_link}}" class="btn">Verificar mi correo</a></p>
+        <p>Si no solicitaste esta verificación, por favor ignora este correo.</p>
+        <p>¡Buena suerte!</p>
+        <p>Atentamente,<br>El equipo del Hotel</p>
+    </div>
+</body>
+</html>
