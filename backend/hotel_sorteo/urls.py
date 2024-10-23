@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/email/', include('email_token.urls')),
     path('api/customers/', include('customers.urls')),
+    path('api/raffle/', include('raffle.urls'))
 ]
