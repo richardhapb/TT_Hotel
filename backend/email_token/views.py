@@ -73,13 +73,10 @@ def send_verification_email(customer, token):
         )
         msg.attach(MIMEText(html_message, "html"))
 
-        from_email = "hotelsorteo@ctsturismo.cl"
-        to = customer.email
-
         # Send the email using SMTP
         with smtplib.SMTP(email_config.HOST, email_config.PORT) as server:
             server.login(email_config.USERNAME, email_config.PASSWORD)
-            server.sendmail(from_email, to, msg.as_string())
+            server.sendmail(msg["From"], customer.email, msg.as_string())
     except Exception as e:
         print(e)
         raise

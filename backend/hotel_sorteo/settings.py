@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import email_config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES = [
@@ -145,6 +144,6 @@ BACKEND_URL = "http://127.0.0.1:8000/api"
 FRONTEND_URL = "http://127.0.0.1:8000/api"
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_TASK_ALWAYS_EAGER = True
-CELERY_TASK_EAGER_PROPAGATES = True
+# CELERY_TASK_ALWAYS_EAGER = True
+# CELERY_TASK_EAGER_PROPAGATES = True
 
