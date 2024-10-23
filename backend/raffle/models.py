@@ -5,7 +5,7 @@ class Raffle(models.Model):
     description = models.TextField(null=True)
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
-    winner = models.ForeignKey('customers.Customer', on_delete=models.CASCADE, null=True)
+    winner = models.ForeignKey('customers.Customer', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
